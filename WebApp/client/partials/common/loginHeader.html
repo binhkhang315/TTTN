@@ -1,0 +1,123 @@
+
+<nav class="navbar navbar-dcc navbar-fixed-top topnav" role="navigation" >
+    <div class="container container-fluid" >
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#loginNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-home" href="/#home">
+                <img class="navbar-logo img-responsive" ng-src="/img/logo/DCC-icon.png" alt="DCC Logo" width="95px">
+                <a id="homepageid" class="navbar-name" href="/#home">DEK<br>Competence Center</a>
+            </a>
+        </div>
+
+        <div class="collapse  navbar-collapse" id="loginNavbar">
+            <ul class="nav navbar-nav navbar-right" style="margin-top: 8px;">
+
+                <li ng-show="$state.current.name == 'home'">
+                    <a ng-show="userInfo.role == 3" id="button-dashboard" href="#trainee_dashboard">Dashboard</a>
+                    <a ng-show="userInfo.role == 2" id="button-dashboard" href="#trainer_dashboard">Dashboard</a>
+                    <a ng-show="userInfo.role == 1" id="button-dashboard" href="#admin_dashboard">Dashboard</a>
+                </li>
+                <li>
+                    <a id="button-calendar" href="#calendar">Training Calendar</a>
+                </li>
+                <li>
+                    <a id="button-contact" href="#contact">Contact</a>
+                </li>
+                <li>
+                    <a data-toggle="modal" data-target="#loginModal" ng-show="!userInfo">Login</a>
+                </li>
+                <li class="brand dropdown" ng-show="userInfo"  style="hover:{}">
+                    <a class="dropdown-toggle" data-toggle="dropdown" style="padding:2px;">
+                        <img  style="display: inline-block; margin-right: 5px; border-radius: 50%; border: 1px solid black; width:45px !important; height:45px !important" class="img-responsive" ng-src = "{{userInfo.avatar}}" >
+                        {{userInfo.username}}   &nbsp <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li ng-show="userInfo.role == 3" ><a href="#trainee_dashboard"><font size="3"><span class="icon-dashboard">&nbsp&nbsp&nbsp</span>Dashboard</font></a></li>
+                        <li ng-show="userInfo.role == 2"><a href="#trainer_dashboard"><font size="3"><span class="icon-dashboard">&nbsp&nbsp&nbsp</span>Dashboard</font></a></li>
+                        <li ng-show="userInfo.role == 1"><a href="#admin_dashboard"><font size="3"><span class="icon-dashboard">&nbsp&nbsp&nbsp</span>Dashboard</font></a></li>
+
+                        <li><a href="#userProfile"><font size="3"><span class="glyphicon glyphicon-user">&nbsp</span>Profile</font></a></li>
+
+                        <li class="divider"></li>
+                        <li><a href="#logout"><font size="3"><span class="glyphicon glyphicon-log-out">&nbsp</span>Logout</font></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<script>
+    $(document).ready(function() {
+        'use strict';
+
+        $("#button-calendar").click(function(e) {
+            window.location.href = "#home";
+            //        e.preventDefault();
+            $('html, body').animate({
+                scrollTop: $("#calendar").offset().top - 100
+            }, 500);
+        });
+
+        $("#button-contact").click(function(e) {
+            window.location.href = "#home";
+            //        e.preventDefault();
+            $('html, body').animate({
+                scrollTop: $("#contact").offset().top
+            }, 500);
+        });
+    });
+</script>
+
+<div ng-controller="loginController">
+    <div class="modal fade" id="loginModal" role="dialog" >
+        <div class="modal-dialog" >
+            <!-- Modal content-->
+            <div class="modal-content">
+                <form name="loginForm"  role="form" class="form-horizontal" novalidate>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Account Login</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Username</label>
+
+                            <input class="col-md-6" type="text" name="email"
+                            value=""
+                            placeholder="Email"
+                            class="login"
+                            ng-model="login.username"
+                            validator="required"
+                            required-error-message="Email is required"
+                            email-error-message="Invalid email address"
+                            valid-method="watch"/>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Password</label>
+
+                            <input class="col-md-6" type="password" name="password"
+                            value=""
+                            placeholder="Password"
+                            class="login "
+                            ng-model="login.password"
+                            validator="required"
+                            required-error-message="Password is required"
+                            valid-method="watch" />
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success"  ng-click="doLogin()" data-dismiss="modal" >Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div >

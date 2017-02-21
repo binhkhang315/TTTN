@@ -1,0 +1,37 @@
+<!-- /navbar -->
+<div class="subnavbar">
+    <div class="subnavbar-inner">
+        <div class="container">
+            <ul class="mainnav">
+                <li ng-class="{active: $state.includes('trainee_dashboard')}" class="dropdown subnavbar-open-right">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon-dashboard"></i><span>Trainee Dashboard &nbsp<i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li ng-show="userInfo.isTrainee" ng-click="userInfo.role = 3"><a href="/#trainee_dashboard">Trainee Dashboard</a></li>
+                        <li ng-show="userInfo.isTrainer" ng-click="userInfo.role = 2"><a href="/#trainer_dashboard">Trainer Dashboard</a></li>
+                        <li ng-show="userInfo.isAdmin" ng-click="userInfo.role = 1"><a href="/#admin_dashboard">Admin Dashboard</a></li>
+                    </ul>
+                </li>
+                <li ng-class="{active: $state.includes('trainee_courseRegister')}"><a ui-sref="trainee_courseRegister"><i class="icon-plus-sign-alt "></i><span>Course Register</span> </a> </li>
+                <li ng-class="{active: $state.includes('userProfile')}"><a ui-sref="userProfile"><i class="icon-user "></i><span>Profile</span> </a> </li>
+
+                <!--
+                <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Others</span> <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:;">Icons</a></li>
+                        <li><a href="javascript:;">FAQ</a></li>
+                        <li><a href="javascript:;">Pricing Plans</a></li>
+                        <li><a href="javascript:;">Login</a></li>
+                        <li><a href="javascript:;">Signup</a></li>
+                        <li><a href="javascript:;">404</a></li>
+                    </ul>
+                </li>
+                -->
+    </ul>
+</div>
+<!-- /container -->
+</div>
+<!-- /subnavbar-inner -->
+</div>
+<!-- /subnavbar -->

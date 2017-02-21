@@ -1,0 +1,100 @@
+<div ng-include="'partials/traineeModule/dashboard/feedbackModal.html'"></div>
+
+<div class="container" ng-controller="MyCoursesCtrl">
+    <div class="span12">
+        <div class="widget">
+            <div class="widget-header">
+                <h3>My Courses</h3>
+            </div>
+            <div class="widget-content" >
+                <center ng-show = "myTrainingProgramList.length == 0">
+                    <h4>You did not learn any course.</h4>
+                    <h5>To request to open new course, or register opening course,</h5>
+                    <h5>go to register menu and choose a course.</h5>
+                </center>
+                <div ng-repeat="trainingProgram in myTrainingProgramList" style="margin-top: 5px">
+                    <div class="round-wrap">
+                        <a data-toggle="collapse" data-target="#collapse{{trainingProgram.id}}" ng-click="trainingProgram.collapsed = !trainingProgram.collapsed">
+                            <blockquote class="blockquote">
+                                <img  style="float:left; clear:both; margin-right: 10px;" alt="training-program-icon" class="img-responsive" ng-src = "{{trainingProgram.imgLink}}" width="70px">
+                                {{trainingProgram.name}}
+                                <footer class="blockquote-footer"> {{trainingProgram.description}}</footer>
+                                <uib-progressbar style="margin:0" class="progress-striped" max="100" value=trainingProgram.completePercent type="success"><i>{{trainingProgram.completePercent}}% completed</i></uib-progressbar>
+                                <center ng-hide="trainingProgram.collapsed"><span class="glyphicon glyphicon-menu-down"></span></center>
+                                <center ng-show="trainingProgram.collapsed"><span class="glyphicon glyphicon-menu-up"></span></center>
+                            </blockquote>
+                        </a>
+                    </div>
+
+                    <div  id="collapse{{trainingProgram.id}}" class="panel-collapse collapse" >
+                        <ul class="list-group">
+                            <li class="row" ng-repeat="myCourse in trainingProgram.Courses">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-9 col-sm-8" style="border-left:2px solid {{myCourse.backgroundColor}};">
+                                    <blockquote class="blockquote">
+                                        <a ui-sref="courseDetail({courseId: myCourse.id})">
+                                            <img  style="float:left; clear:both; margin-right:10px;" alt="course-icon" class="img-responsive" ng-src = "{{myCourse.imgLink}}" width="70px">
+                                            {{myCourse.name}}
+                                            <footer class="blockquote-footer">{{myCourse.description}}</footer>
+                                        </a>
+                                    </blockquote>
+                                </div>
+                                <div class="col-md-2 col-sm-4">
+                                    <center>
+                                        <div class="dropdown">
+                                            <a class="dropdown-toggle btn" style="background-color: {{myCourse.backgroundColor}}" data-toggle="dropdown">
+                                                {{myCourse.status}} &nbsp <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li ng-click="actionOneClick(myCourse)"><a data-toggle="modal" data-target="#feedbackModal">{{actionOneText[myCourse.status]}}</a></li>
+                                                <li ng-click="actionTwoClick(myCourse)"><a>{{actionTwoText[myCourse.status]}}</a></li>
+                                            </ul>
+                                        </div>
+
+                                    </center>
+                                </div>
+                                <br />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container" ng-controller="requestOpenCourseCtrl">
+    <div class="span6">
+        <div class="widget">
+            <div class="widget-header">
+                <h3>My Request Open Course</h3>
+            </div>
+            <div class="widget-content" >
+                <center ng-show = "myRequestOpenCourseList.length == 0">
+                    <h4>You did not request to open any course.</h4>
+                    <h5>To request to open new course, go to register menu and choose a course.</h5>
+                </center>
+
+                <div class="row round-wrap" ng-repeat="requestOpenCourse in myRequestOpenCourseList">
+                    <div class="col-md-8 col-sm-6">
+                        <blockquote class="blockquote">
+                            <a ui-sref="courseDetail({courseId: requestOpenCourse.id})" style="text-decoration: none">
+                                <img  style="float:left; clear:both; margin:8px;" alt="course-icon" class="img-responsive" ng-src = "{{requestOpenCourse.imgLink}}" width="70px">
+                                {{requestOpenCourse.name}}
+                                <footer class="blockquote-footer" style="color: black;">{{requestOpenCourse.description}}</footer>
+                            </a>
+                        </blockquote>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <center>
+                            <br>
+                            <a ng-click="cancelRequestClick(requestOpenCourse.id)" class="btn btn-warning" style="margin-top:5px;">Cancel Request</a>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

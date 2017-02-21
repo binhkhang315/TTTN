@@ -1,0 +1,84 @@
+<!-- <div ng-include="'partials/traineeModule/dashboard/feedbackModal.html'"></div> -->
+<div ng-include="'partials/adminModule/courseManagement/addEditCourse.html'"></div>
+<div ng-include="'partials/adminModule/courseManagement/deleteCourse.html'"></div>
+<div ng-include="'partials/adminModule/courseManagement/addEditTPModal.html'"></div>
+<div ng-include="'partials/common/course/addEditClassModal.html'"></div>
+
+<div class="container" ng-controller="courseManagementCtrl">
+    <div class="span12">
+        <div class="widget">
+            <div class="widget-header">
+                <h3>Training Programs</h3>
+            </div>
+            <div class="widget-content" >
+                <center ng-show = "adminTrainingProgramList.length == 0">
+                    <h4>You did not create any Training Program.</h4>
+                    <h5>To create click on "Add Training Program" </h5>
+                </center>
+                <div>
+                    <blockquote class="blockquote">
+                        <div class="btn btn-success" data-toggle="modal" href="#addEditTPModal"  ng-click="showAddTPForm()">
+                            <span class="glyphicon glyphicon-plus"></span>&nbsp Add Training Program
+                        </div>
+                    </blockquote>
+                </div>
+                <div ng-repeat="trainingProgram in adminTrainingProgramList" style="margin-top: 5px">
+                    <div class="round-wrap">
+                        <a>
+                            <blockquote class="blockquote" data-toggle="collapse" data-target="#collapse{{trainingProgram.id}}" ng-click="trainingProgram.collapsed = !trainingProgram.collapsed">
+                                <img  style="float:left; clear:both; margin-right: 10px;" alt="training-program-icon" class="img-responsive" ng-src = "{{trainingProgram.imgLink}}" width="70px">
+                                {{trainingProgram.name}}
+                                <div class="pull-right">
+                                    <a class="btn btn-info" data-toggle="modal" href="#addEditTPModal" ng-click="showUpdateTPForm(trainingProgram)"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-danger" data-toggle="modal" href="#deleteModal" ng-click="showDeleteTPForm(trainingProgram)"><span class="glyphicon glyphicon-trash"></span></a>
+                                </div>
+                                <footer class="blockquote-footer"> {{trainingProgram.description}}</footer>
+                                <center ng-hide="trainingProgram.collapsed"><span class="glyphicon glyphicon-menu-down"></span></center>
+                                <center ng-show="trainingProgram.collapsed"><span class="glyphicon glyphicon-menu-up"></span></center>
+                                <!-- TODO Edit add Training Program -->
+                            </blockquote>
+                        </a>
+                    </div>
+
+                    <div  id="collapse{{trainingProgram.id}}" class="panel-collapse collapse" >
+                        <ul class="list-group">
+                            <!-- Add Course -->
+                            <li class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-9 col-sm-8" style="border-left:2px solid #D3D3D3;">
+                                    <div class="btn btn-success" data-toggle="modal" href="#addEditCourseModal"  ng-click="showAddCourseForm(trainingProgram)">
+                                        <span class="glyphicon glyphicon-plus"></span>&nbsp Add Course</div>
+                                </div>
+                                <div class="col-md-2 col-sm-4"></div>
+                            </li>
+                            <li class="row" ng-repeat="course in trainingProgram.Courses">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-7 col-sm-8" style="border-left:2px solid #D3D3D3">
+                                    <blockquote class="blockquote">
+                                        <a ui-sref="courseDetail({courseId: course.id})">
+                                            <img  style="float:left; clear:both; margin-right:10px;" alt="course-icon" class="img-responsive" ng-src = "{{course.imgLink}}" width="70px">
+                                            {{course.name}}
+                                            <footer class="blockquote-footer">{{course.description}}</footer>
+                                            </a>
+                                    </blockquote>
+                                </div>
+                                <!-- Class -->
+                                <div class="col-md-3 col-sm-4">
+                                    <center >
+                                        <!-- Edit and Delete Course -->
+                                        <a class="btn btn-info" data-toggle="modal" href="#addEditCourseModal" ng-click="showUpdateCourseForm(trainingProgram, course )"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <a class="btn btn-danger" data-toggle="modal" href="#deleteModal" ng-click="showDeleteCourseForm(course)"><span class="glyphicon glyphicon-trash"></span></a>
+                                        <a class="btn btn-success" data-toggle="modal" href="#addEditClassModal"  ng-click="showAddClassForm(course)"><span class="glyphicon glyphicon-plus"></span>&nbsp Add class</a>
+                                    </center>
+                                </div>
+                                <br />
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

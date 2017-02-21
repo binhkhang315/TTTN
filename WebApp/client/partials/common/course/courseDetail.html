@@ -1,0 +1,144 @@
+<div ng-include="'partials/common/course/addEditClassModal.html'"></div>
+
+<div class="container" ng-controller="courseDetailCtrl">
+    <div class="container row">
+        <div class="span12">
+            <div class="widget widget-nopad">
+                <div class="widget-header">
+                    <h3>Course details</h3>
+                </div>
+                <div class="widget-content" >
+                    <div class="widget big-stats-container" style="margin-bottom:0">
+                        <div class="widget-content">
+                            <div class="control-group">
+                                <div class="controls">
+                                    <div class="panel-group">
+                                        <center>
+                                            <h3>{{courseDetail.name}}</h3>
+                                        </center>
+                                        <uib-tabset active="activeJustified" justified="true" style="margin:10px;">
+                                            <uib-tab index="0"><uib-tab-heading><i class="glyphicon glyphicon-edit"></i>&nbsp Description</uib-tab-heading>{{courseDetail.description}}</uib-tab>
+                                            <uib-tab index="1"><uib-tab-heading><i class="glyphicon glyphicon-equalizer"></i>&nbsp Document</uib-tab-heading>{{courseDetail.documents}}</uib-tab>
+                                            <uib-tab index="2"><uib-tab-heading><i class="glyphicon glyphicon-education"></i>&nbsp Test</uib-tab-heading>{{courseDetail.test}}</uib-tab>
+
+                                            <uib-tab index="3" ng-show="userInfo.role == 1"><uib-tab-heading><i class="glyphicon glyphicon-th-list"></i>&nbsp Classes History</uib-tab-heading>
+                                                <div class="btn btn-success" data-toggle="modal" href="#addEditClassModal"  ng-click="showAddClassForm()"><span class="glyphicon glyphicon-plus"></span>&nbsp Add class</span></div>
+                                                <div ng-repeat="class in classList" style="margin-top: 5px">
+                                                    <div class="round-wrap" data-toggle="collapse" data-target="#collapse{{class.id}}">
+                                                        <a>
+                                                            <blockquote class="blockquote">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <img  style="float:left; clear:both; margin-right: 10px; border-radius: 50%" alt="trainer-avatar" class="img-responsive" ng-src = "{{class.trainerAvatar}}" width="70px">
+                                                                        Trainer: {{class.trainerName}}
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="col-md-4">
+                                                                            <i class="fa fa-building" aria-hidden="true">&nbsp {{class.location}}</i>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <i class="fa fa-calendar" aria-hidden="true"> &nbsp {{class.startTime | date: "dd/MM/yyyy"}}</i>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <center>
+                                                                                <h5>Average Rating: &nbsp <span class="label" ng-class="{'label-warning': class.ratingAverage<2, 'label-info': class.ratingAverage>=2 && class.ratingAverage<5, 'label-success': class.ratingAverage>=5}">
+                                                                                    {{class.ratingAverage}}</span>
+                                                                                </h5>
+                                                                                <h5>Num of Trainee: {{class.numTrainee}} &nbsp <i class="fa fa-user" aria-hidden="true"></i><h5>
+                                                                                </center>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2">
+                                                                            <a class="btn btn-info" data-toggle="modal" href="#addEditClassModal" ng-click="showUpdateClassForm(class)"><span class="glyphicon glyphicon-pencil"></span></a>
+                                                                            <a class="btn btn-danger" data-toggle="modal" href="#deleteClassModal" ng-click="showDeleteClassForm(class)"><span class="glyphicon glyphicon-trash"></span></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <center ng-show="class.traineeList.length > 0"><span class="glyphicon glyphicon-menu-down"></span></center>
+                                                                </blockquote>
+                                                            </a>
+                                                        </div>
+
+
+                                                        <div  id="collapse{{class.id}}" class="panel-collapse collapse" ng-show="class.traineeList.length > 0">
+                                                            <ul class="list-group">
+                                                                <li class="row">
+                                                                    <div class="col-md-1"></div>
+                                                                    <div class="col-md-11 col-sm-8" style="border-left:2px solid {{course.backgroundColor}};">
+                                                                        <div style="font-style: italic; size: 11px;">
+                                                                            <div class="col-md-4">
+                                                                                Trainee Name
+                                                                            </div>
+                                                                            <div class="col-md-6 col-sm-8">
+                                                                                Comments
+                                                                            </div>
+                                                                            <div class="col-md-2 col-sm-4">
+                                                                                Rating
+                                                                            </div>
+                                                                        </div>
+                                                                        <br />
+                                                                    </li>
+                                                                    <!-- List of trainee -->
+                                                                    <li class="row" ng-repeat="trainee in class.traineeList">
+                                                                        <div class="col-md-1"></div>
+                                                                        <div class="col-md-11 col-sm-8" style="border-left:2px solid {{course.backgroundColor}};">
+                                                                            <blockquote class="blockquote">
+                                                                                <div class="col-md-4">
+                                                                                    <img  style="float:left; clear:both; margin-right:10px; border-radius: 50%" alt="trainee.avatar" class="img-responsive" ng-src = "{{trainee.traineeAvatar}}" width="60px">
+                                                                                    {{trainee.traineeName}}
+                                                                                </div>
+                                                                                <div class="col-md-6 col-sm-8">
+                                                                                    <q style="font-style: italic">{{trainee.comment}}</q>
+                                                                                </div>
+                                                                                <div class="col-md-2 col-sm-4">
+                                                                                    <!-- <div ng-init="{{trainee.rating}}"><span uib-rating ng-model="trainee.rating" max="max" read-only="true" on-leave="overStar = null" aria-labelledby="default-rating"></span></div>
+                                                                                    &nbsp -->
+                                                                                    <span class="label" ng-class="{'label-warning': trainee.rating<2, 'label-info': trainee.rating>=2 && trainee.rating<5, 'label-success': trainee.rating>=5}" >{{trainee.rating}} Stars</span>
+                                                                                </div>
+                                                                            </blockquote>
+                                                                            <br />
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+
+                                                        </uib-tab>
+
+                                                        <!-- feedback and rating -->
+                                                        <!-- <uib-tab index="3"><uib-tab-heading><i class="glyphicon glyphicon-star-empty"></i> Feedback & Rating</uib-tab-heading>
+                                                        <div class="row">
+                                                        <br/>
+                                                        <div class="col-md-3"></div>
+                                                        <center>
+                                                        <h3 class="col-md-3" style="color: black">Your rating: &nbsp</h3>
+                                                    </center>
+                                                    <div class="col-md-4">
+                                                    <br>
+                                                    <font size="6px">
+                                                    <center>
+                                                    <span uib-rating ng-model="rate" max="max" read-only="isReadonly" on-click="giveFeedback(rate)" on-hover="hoveringOver(value)" on-leave="overStar = null" aria-labelledby="default-rating"></span>
+                                                    <span class="label" ng-class="{'label-warning': rate<2, 'label-info': rate>=2 && rate<5, 'label-success': rate>=5}" >{{rate}}&nbsp stars</span>
+                                                </center>
+                                            </font>
+                                        </div>
+                                        <div class="col-md-2"></div>
+                                    </div>
+                                    <div class="row">
+                                    <br/>
+                                    <div class="col-md-3"></div>
+                                    <center>
+                                    <h3 class="col-md-3" style="color: black">Your feedback: &nbsp</h3>
+                                </center>
+                                <div class="col-md-3">
+                                <textarea type="text" class="form-control"></textarea>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <br>
+                        <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                        <center><div class="btn btn-primary btn-lg" style="width: 150px">Send</div></center>
+                    </div>
+                </div>
+            </uib-tab> -->
+
+        </uib-tabset>
