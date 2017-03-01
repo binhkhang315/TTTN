@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>DEK Competence Center</title>
+    <title>DAI HOC BACH KHOA TP.HCM</title>
     <link rel="icon" href="/img/logo/DCC-icon.png" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,11 +38,6 @@
 
         <div id="header">
             <div ng-include="'partials/common/loginHeader.html'"></div> <!-- loginHeader -->
-            <div ng-show="$state.current.name != 'home'">
-                <div ng-include="'partials/common/adminHeader.html'" ng-show="userInfo.role == 1"></div> <!-- adminHeader -->
-                <div ng-include="'partials/common/trainerHeader.html'" ng-show="userInfo.role == 2"></div> <!-- trainerHeader -->
-                <div ng-include="'partials/common/traineeHeader.html'" ng-show="userInfo.role == 3"></div> <!-- traineeHeader -->
-            </div>
         </div><!-- #header -->
 
         <div id="content">
@@ -83,13 +78,8 @@
     <!-- App source code -->
     <script src="app.js"></script>
     <script src="partials/home/home.js"></script>
-    <script src="partials/users/users.js"></script>
-    <script src="partials/traineeModule/dashboard/dashboard.js"></script>
-    <script src="partials/traineeModule/courseRegister/courseRegister.js"></script>
-    <script src="partials/calendarModule/calendar.js"></script>
-    <script src="partials/common/course/courseDetail.js"></script>
-    <script src="partials/adminModule/courseManagement/courseManagement.js"></script>
-    <script src="partials/adminModule/dashboard/dashboard.js"></script>
+    <script src="partials/image/uploadImage/uploadImage.js"></script>
+    <script src="partials/image/viewImage/viewImage.js"></script>
 
     <!--TextAngular-->
     <script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular-rangy.min.js'></script>

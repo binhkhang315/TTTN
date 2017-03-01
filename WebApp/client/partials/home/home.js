@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('home', ['calendarModule']);
+angular.module('home', []);
 
 //Routers
 myApp.config(function($stateProvider) {

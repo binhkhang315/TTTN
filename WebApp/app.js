@@ -48,6 +48,6 @@ models.sequelize.sync({force:false});
 var address = serverIP.getIP();
 app.set('port', (process.env.PORT || 3210));
 var server = app.listen(app.get('port'), address, function() {
-    console.log('Listening to port:  ' + app.get('port'));
+    console.log('Listening to:  ' + address + ':' + app.get('port'));
 });
 module.exports = server;

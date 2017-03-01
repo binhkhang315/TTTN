@@ -7,15 +7,9 @@ var myApp = angular.module('myApp', [
     'validation',
     'validation.rule',
     'textAngular',
-    'users',
-    'trainee_dashboard',
-    'trainee_courseRegister',
     'home',
-    'calendarModule',
-    'courseDetail',
-    'admin_courseManagement',
-    'admin_dashboard',
-
+    'viewImage',
+    'uploadImage'
 ]);
 
 //Config phase

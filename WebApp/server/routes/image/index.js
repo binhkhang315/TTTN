@@ -1,6 +1,8 @@
 var router = require('express').Router();
 
-router.use('/', require('./index/index.js'));
+// split up route handling
 router.use('/image', require('./image'));
+
+// etc.
 
 module.exports = router;
