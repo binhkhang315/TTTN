@@ -67,12 +67,14 @@ input,button,select,textarea {
 .navbar-inner {
 	padding: 7px 0;
 
-	background: #000000 !important;
+	background: #00ba8b !important;
 
 	-moz-border-radius: 0;
 	-webkit-border-radius: 0;
 	border-radius: 0;
 }
+
+.navbar .nav>li>a { color:#fff !important;}
 
 .navbar-fixed-top {
 	position: static;

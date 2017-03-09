@@ -7,6 +7,8 @@ var session = require('express-session');
 var passport = require('passport');
 var models = require('./server/models');
 var serverIP = require('./server/serverIPAddress');
+// var flash=require("connect-flash");
+
 
 // Init App
 var app = express();
@@ -21,6 +23,7 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(cookieParser());
+// Passport init
 app.use(session({
     secret: 'secret',
     cookie: {
@@ -29,8 +32,6 @@ app.use(session({
     saveUninitialized: true,
     resave: true
 }));
-
-// Passport init
 app.use(passport.initialize());
 app.use(passport.session());
 
