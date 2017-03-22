@@ -2,7 +2,11 @@ var SequelizeDatatypes = require('sequelize');
 
 module.exports=
 {
-     username: {
+     firstName: {
+          type: SequelizeDatatypes.STRING,
+          allowNull: false
+     },
+     lastName: {
           type: SequelizeDatatypes.STRING,
           allowNull: false
      },
@@ -13,13 +17,5 @@ module.exports=
      password: {
           type: SequelizeDatatypes.STRING,
           allowNull: false
-     },
-     phone: {
-          type: SequelizeDatatypes.STRING,
-          allowNull: true
-     },
-     avatar: {
-          type: SequelizeDatatypes.STRING,
-          allowNull: true
      }
 }

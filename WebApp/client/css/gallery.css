@@ -1,0 +1,19 @@
+.images
+{
+display: inline;
+margin: 0px;
+padding: 0px;
+}
+
+#content
+{
+display: block;
+margin: 0px;
+padding: 0px;
+position: relative;
+top: 90px;
+height: auto;
+max-width: auto;
+overflow-y: hidden;
+overflow-x:auto;
+}

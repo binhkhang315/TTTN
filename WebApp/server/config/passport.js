@@ -16,19 +16,14 @@ module.exports = function(passport){
 
      passport.use('local-signup', new LocalStrategy({
           // by default, local strategy uses username and password, we will override with email
+          usernameField: 'email',
+          passwordField: 'password',
           passReqToCallback: true // allows us to pass back the entire request to the callback
      },
-     function(req, username, password, done) {
+     function(req, email, password, done) {
           models.User.findOne({
                where: {
-                    $or: [
-                         {
-                              email: req.body.email
-                         },
-                         {
-                              username: req.body.username
-                         }
-                    ]
+                    email: req.body.email
                }
           }).then(function(user, err) {
                if(err) {
@@ -37,7 +32,8 @@ module.exports = function(passport){
                }
                if(user == null) {
                     models.User.create({
-                         username: req.body.username,
+                         firstName: req.body.firstName,
+                         lastName: req.body.lastName,
                          email: req.body.email,
                          password: req.body.password
                     }).then(function(user) {
@@ -57,12 +53,14 @@ module.exports = function(passport){
 
      passport.use('local-signin', new LocalStrategy({
           // by default, local strategy uses username and password, we will override with email
+          usernameField: 'email',
+          passwordField: 'password',
           passReqToCallback: true // allows us to pass back the entire request to the callback
      },
      function(req, username, password, done) {
           models.User.findOne({
                where: {
-                    username: req.body.username,
+                    email: req.body.email,
                     password: req.body.password
                }
           }).then(function(user, err) {

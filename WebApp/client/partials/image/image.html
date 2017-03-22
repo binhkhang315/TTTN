@@ -1,0 +1,35 @@
+<div ng-controller="imageController" class="row">
+     <div class="span12">
+          <div class="widget widget-nopad">
+               <div class="widget-header"> <i class="icon-list-alt"></i>
+                    <h3>My Image</h3>
+               </div>
+               <!-- /widget-header -->
+               <div class="widget-content">
+                    <div class="widget big-stats-container">
+                         <div class="widget-content" style="padding:5px;">
+                              <ul id="content">
+                                   <li ng-repeat="image in imgList track by $index">
+                                        <a ng-click="openLightboxModal($index)">
+                                             <img ng-src="{{image.thumbUrl}}" class="img-thumbnail">
+                                        </a>
+                                   </li>
+                              </ul>
+                         </div>
+                    </div>
+                    <!-- /widget-content -->
+               </div>
+          </div>
+          <!-- /widget -->
+     </div>
+</div>
+
+<!-- <script type="text/ng-template" id="myModal.html">
+     <div style="width: 500px; height: 600px;">
+          <div class="myModal">
+               <div class="modal-content">
+                    <img ng-src="../../img/gallery/img_fjords.jpg">
+               </div>
+          </div>
+     </div>
+</script> -->
